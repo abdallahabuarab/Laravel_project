@@ -28,6 +28,7 @@ class AuthManager extends Controller
     function loginpost(Request $request)
     {
 
+
         $request->validate([
             'email' => 'required|email',
             'password' => 'required'

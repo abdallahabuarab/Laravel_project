@@ -5,9 +5,16 @@ namespace App\Http\Controllers;
 use App\Http\Requests\RegisterRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
 {
+    public function __construct()
+    {
+        $this->authorizeResource(User::class);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -24,9 +31,11 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Request $request)
+    public function create(Request $request,User $user)
     {
-        return view('users.create');
+        $loggedUser = Auth::user();
+        $roles = Role::all();
+        return view('users.create',compact('user','roles'));
     }
 
     /**
@@ -67,7 +76,11 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        return view('users.edit' , compact('user'));
+        $loggedUser = Auth::user();
+        // abort_unless($loggedUser->hasPermissionTo('edit users'), 403);
+
+        $roles = Role::all();
+        return view('users.edit' , compact('user' , 'roles'));
         //
     }
 
@@ -83,7 +96,10 @@ class UserController extends Controller
         $user->update([
         'name' => $request->name,
         'email' => $request->email,
+        'role'=>$request->name
      ]);
+
+     $user->syncRoles($request->role);
 
      return redirect(route('users.index'));
     }

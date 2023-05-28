@@ -8,6 +8,10 @@ use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
+    public function __construct()
+    {
+        $this->authorizeResource(Product::class);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -70,7 +74,8 @@ class ProductController extends Controller
      */
     public function edit(product $product)
     {
-        return view('products.edit', compact('product'));
+        $brands=Brand::all();
+        return view('products.edit', compact('product' , 'brands'));
     }
 
     /**
@@ -82,7 +87,8 @@ class ProductController extends Controller
      */
     public function update(Request $request, product $product)
     {
-        $data = ['name' => $request->name,'description'=>$request->description];
+
+        $data = ['name' => $request->name,'description'=>$request->description,'brand_id' => $request->brand_id];
 
         if ($request->hasFile('image')) {
             $path = $request->file('image')->store('/images', 'public');

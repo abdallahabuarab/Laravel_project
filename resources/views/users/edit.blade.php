@@ -21,6 +21,14 @@
                 @enderror
             </div>
             <div class="mb-3">
+                <select name="role">
+                    @foreach ($roles as $role)
+                        <option @if($role->id == $user->id) selected @endif value="{{$role->name}}">{{ $role->name }}</option>
+                    @endforeach
+                </select>
+            </div>
+
+            <div class="mb-3">
                 <label for="exampleInputEmail1" class="form-label">Password</label>
                 <input type="password" name="password" class="form-control @if($errors->has('password')) is-invalid @endif" id="exampleInputEmail1"
                     aria-describedby="emailHelp">

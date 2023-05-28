@@ -5,11 +5,13 @@ use App\Models\products;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\AuthManager;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\PermissionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,6 +27,7 @@ use App\Http\Controllers\CategoryController;
 
 
 Route::get('/welcome', function () {
+    return bcrypt('123456789');
     return view('welcome');
 })->name('welcome');
 Route::get('/login', function () {
@@ -52,6 +55,8 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin'], function () {
     Route::resource('/categories', CategoryController::class);
     Route::resource('/products', ProductController::class);
     Route::resource('/brands', BrandController::class);
+    Route::resource('/roles', RoleController::class);
+    Route::resource('/permissions', PermissionController::class);
 
 
 

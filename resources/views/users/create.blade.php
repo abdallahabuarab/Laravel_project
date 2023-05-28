@@ -28,6 +28,13 @@
                 @enderror
             </div>
             <div class="mb-3">
+                <select name="role">
+                    @foreach ($roles as $role)
+                        <option value="{{$role->name}}">{{ $role->name }}</option>
+                    @endforeach
+                </select>
+            </div>
+            <div class="mb-3">
                 <label for="exampleInputEmail1" class="form-label">Submit</label>
                 <input type="submit" name="submit" class="form-control "  value="Add User"id="exampleInputEmail1"
                     aria-describedby="emailHelp">

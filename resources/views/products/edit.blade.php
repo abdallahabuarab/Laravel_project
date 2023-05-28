@@ -25,6 +25,13 @@
                     aria-describedby="emailHelp">
 
             </div>
+            <div class="mb-3">
+                <select name="brand_id">
+                    @foreach ($brands as $brand)
+                        <option @if($brand->id == $product->brand_id) selected @endif value="{{$brand->id}}">{{ $brand->name }}</option>
+                    @endforeach
+                </select>
+            </div>
 
             <div class="mb-3">
 

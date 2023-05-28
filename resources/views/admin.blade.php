@@ -37,6 +37,18 @@
                             Brands
                         </a>
                     </li>
+                    <li class="nav-item m-3">
+                        <a href="/admin/roles" class="nav-link @if (str_starts_with(Route::current()->getName(), 'roles')) active @endif"
+                            aria-current="page">
+                            Roles
+                        </a>
+                    </li>
+                    <li class="nav-item m-3">
+                        <a href="/admin/permissions" class="nav-link @if (str_starts_with(Route::current()->getName(), 'permission')) active @endif"
+                            aria-current="page">
+                            Permissions
+                        </a>
+                    </li>
 
                 </ul>
                 <hr>

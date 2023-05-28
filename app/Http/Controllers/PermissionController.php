@@ -2,15 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Brand;
 use Illuminate\Http\Request;
+use Spatie\Permission\Models\Permission;
 
-class BrandController extends Controller
+class PermissionController extends Controller
 {
-    public function __construct()
-    {
-        $this->authorizeResource(Brand::class);
-    }
     /**
      * Display a listing of the resource.
      *
@@ -18,8 +14,8 @@ class BrandController extends Controller
      */
     public function index()
     {
-        $brands = Brand::all();
-        return view('brands.index', compact('brands'));
+        $permissions=Permission::all();
+      return view('permissions.index',compact('permissions'));
     }
 
     /**
@@ -29,7 +25,7 @@ class BrandController extends Controller
      */
     public function create()
     {
-        return view('brands.create');
+    return view('permissions.create');
     }
 
     /**
@@ -40,15 +36,12 @@ class BrandController extends Controller
      */
     public function store(Request $request)
     {
-        $file = $request->file('image')->store('/images', 'public');
-
-        Brand::create([
+        Permission::create([
             'name' => $request->name,
-            'images' => $file,
-
+            'groupe'=>$request->groupe
         ]);
 
-        return redirect(route('brands.index'));
+        return redirect(route('permissions.index'));
     }
 
     /**
@@ -57,9 +50,9 @@ class BrandController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(brand $brand)
+    public function show(Permission $permission)
     {
-        return view('brands.show' , compact('brand'));
+        return view('permissions.show' , compact('permission'));
     }
 
     /**
@@ -68,9 +61,9 @@ class BrandController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(brand $brand)
+    public function edit(Permission $permission)
     {
-        return view('brands.edit', compact('brand'));
+        return view('permissions.edit', compact('permission'));
     }
 
     /**
@@ -80,18 +73,13 @@ class BrandController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Brand $brand)
+    public function update(Request $request,Permission $permission)
     {
-        $data = ['name' => $request->name];
-
-        if ($request->hasFile('image')) {
-            $path = $request->file('image')->store('/images', 'public');
-            $data['images'] = $path;
-        }
-
-        $brand->update($data);
-
-        return redirect(route('brands.index'));
+      $permission->update([
+       'name'=>$request->name,
+       'groupe'=>$request->groupe
+      ]);
+      return redirect(route('permissions.index'));
     }
 
     /**
@@ -102,7 +90,8 @@ class BrandController extends Controller
      */
     public function destroy($id)
     {
-        Brand::find($id)->delete();
+        Permission::find($id)->delete();
         return redirect()->back();
+
     }
 }
