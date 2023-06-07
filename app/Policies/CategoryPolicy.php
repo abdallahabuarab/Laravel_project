@@ -28,7 +28,10 @@ class CategoryPolicy
      * @param  \App\Models\post  $post
      * @return \Illuminate\Auth\Access\Response|bool
      */
-
+    public function view(User $user)
+    {
+        return $user->hasPermissionTo('view categories');
+    }
 
     /**
      * Determine whether the user can create models.

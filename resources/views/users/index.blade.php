@@ -12,6 +12,7 @@
                             <th scope="col">ID</th>
                             <th scope="col">Name</th>
                             <th scope="col">Email</th>
+                            <th scope="col">Role</th>
                             <th class="text-center" scope="col">Actions</th>
                         </tr>
                     </thead>
@@ -21,6 +22,7 @@
                                 <th scope="row">{{ $user->id }}</th>
                                 <td><a href="{{route('users.show',['user' => $user])}}"> {{ $user->name }}</a></td>
                                 <td>{{ $user->email }}</td>
+                                <td>{{ $user->roles[0]->name }}</td>
                                 <td>
                                     <div class="d-flex justify-content-center">
 

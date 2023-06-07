@@ -16,8 +16,10 @@ class RoleController extends Controller
      */
     public function index()
     {
+
         $roles=Role::all();
         return view('roles.index',compact('roles'));
+
     }
 
     /**
@@ -89,7 +91,7 @@ class RoleController extends Controller
         $role->update([
             'name'=>$request->name,
            ]);
-           $role->givePermissionTo($request->permissions);
+           $role->syncPermissions($request->permissions);
            return redirect(route('roles.index'));
     }
 

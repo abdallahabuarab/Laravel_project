@@ -1,8 +1,6 @@
 @extends('layout')
 @section('body')
     @auth
-
-
         <div class="d-flex">
             <div style="min-height: 100vh; width: 280px;" class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark">
                 <a href="/admin" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
@@ -69,5 +67,9 @@
                 @yield('content')
             </div>
         </div>
+         <div class="p-4 d-flex">
+
+
+         </div>
     @endauth
 @endsection

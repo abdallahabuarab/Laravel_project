@@ -22,7 +22,9 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::all();
+
+        $users = User::with('roles')->get();
+
         return view('users.index' , compact('users'));  //  ['users'=>$users]
     }
 
@@ -33,7 +35,7 @@ class UserController extends Controller
      */
     public function create(Request $request,User $user)
     {
-        $loggedUser = Auth::user();
+
         $roles = Role::all();
         return view('users.create',compact('user','roles'));
     }
@@ -46,13 +48,14 @@ class UserController extends Controller
      */
     public function store(RegisterRequest $request)
     {
-        User::create([
+
+        $user=User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => bcrypt($request->password),
 
         ]);
-
+        $user->syncRoles($request->role);
         return redirect(route('users.index'));
     }
 
@@ -76,7 +79,7 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        $loggedUser = Auth::user();
+
         // abort_unless($loggedUser->hasPermissionTo('edit users'), 403);
 
         $roles = Role::all();
@@ -110,9 +113,9 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(User $user)
     {
-        User::find($id)->delete();
+        $user->delete();
         return redirect()->back();
 
     }

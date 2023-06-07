@@ -42,7 +42,7 @@ class CategoryController extends Controller
     {
         $file = $request->file('image')->store('/images', 'public');
 
-        Category::create([
+       Category::create([
             'name' => $request->name,
             'images' => $file,
 
@@ -99,9 +99,9 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Category $category)
     {
-        Category::find($id)->delete();
+        $category->delete();
         return redirect()->back();
     }
 }

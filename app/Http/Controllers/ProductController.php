@@ -44,7 +44,7 @@ class ProductController extends Controller
     {
         $file = $request->file('image')->store('/images', 'public');
 
-        Product::create([
+        $product=Product::create([
             'name' => $request->name,
             'description' => $request->description,
             'images' => $file,
@@ -106,9 +106,9 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Product $product)
     {
-        Product::find($id)->delete();
+        $product->delete();
         return redirect()->back();
     }
 }
