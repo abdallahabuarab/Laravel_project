@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\RegisterRequest;
+use App\Models\Department;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -10,10 +11,7 @@ use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
 {
-    public function __construct()
-    {
-        $this->authorizeResource(User::class);
-    }
+
 
     /**
      * Display a listing of the resource.
@@ -23,7 +21,8 @@ class UserController extends Controller
     public function index()
     {
 
-        $users = User::with('roles')->get();
+        $users = User::with('department')->get();
+
 
         return view('users.index' , compact('users'));  //  ['users'=>$users]
     }
@@ -33,11 +32,11 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Request $request,User $user)
+    public function create()
     {
+     $departments=Department::all();
 
-        $roles = Role::all();
-        return view('users.create',compact('user','roles'));
+        return view('users.create',compact('departments'));
     }
 
     /**
@@ -49,14 +48,26 @@ class UserController extends Controller
     public function store(RegisterRequest $request)
     {
 
+
         $user=User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => bcrypt($request->password),
+            'images'=>$request->file('images')->store('/images', 'public'),
+            'department_id'=>$request->department_id
 
         ]);
-        $user->syncRoles($request->role);
+
         return redirect(route('users.index'));
+    }
+    public function search(Request $request){
+
+     $name= $request->search;
+      $users=User::where('name','LIKE','%'.$name.'%')->orWhere('email','LIKE','%'.$name.'%')->get();
+      return view('users.search',compact('users'));
+
+
+
     }
 
     /**
@@ -81,9 +92,9 @@ class UserController extends Controller
     {
 
         // abort_unless($loggedUser->hasPermissionTo('edit users'), 403);
+       $departments=Department::all();
 
-        $roles = Role::all();
-        return view('users.edit' , compact('user' , 'roles'));
+        return view('users.edit' , compact('user','departments'));
         //
     }
 
@@ -96,13 +107,16 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        $user->update([
-        'name' => $request->name,
+        $data=[ 'name' => $request->name,
         'email' => $request->email,
-        'role'=>$request->name
-     ]);
+        'department_id'=>$request->department_id];
+        if ($request->hasFile('images')) {
+            $path = $request->file('images')->store('/images', 'public');
+            $data['images'] = $path;
+        }
+        $user->update([$data]);
 
-     $user->syncRoles($request->role);
+
 
      return redirect(route('users.index'));
     }

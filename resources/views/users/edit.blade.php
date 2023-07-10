@@ -21,12 +21,11 @@
                 @enderror
             </div>
             <div class="mb-3">
-                <select name="role">
-                    @foreach ($roles as $role)
-                        <option @if($role->id == $user->id) selected @endif value="{{$role->name}}">{{ $role->name }}</option>
+                <select name="department_id">
+                    @foreach ($departments as $department)
+                        <option @if($department->id == $user->department_id) selected @endif value="{{$department->id}}">{{ $department->name }}</option>
                     @endforeach
                 </select>
-            </div>
 
             <div class="mb-3">
                 <label for="exampleInputEmail1" class="form-label">Password</label>
@@ -36,6 +35,16 @@
                     <span class="invalid-feedback">{{$message}}</span>
                 @enderror
             </div>
+            <div class="mb-3">
+                <img height="100" src="/storage/{{$user->images}}" alt="">
+            </div>
+            <div class="mb-3">
+
+                <input type="file" name="images" class="form-control " id="exampleInputEmail1"
+                    aria-describedby="emailHelp">
+
+            </div>
+
             <div class="mb-3">
                 <label for="exampleInputEmail1" class="form-label">Submit</label>
                 <input type="submit" name="submit" class="form-control "  value="Add User"id="exampleInputEmail1"

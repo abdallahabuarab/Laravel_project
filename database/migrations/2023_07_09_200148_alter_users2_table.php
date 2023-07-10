@@ -13,18 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-       Schema::table('products' , function(Blueprint $table){
-        $table->unsignedBigInteger('brand_id');
-
-        $table->foreign('brand_id')->on('brands')->references('id')->onDelete('cascade');
-
-        /*
-     Schema::table('products', function (Blueprint $table) {
-    $table->foreignId('brand_id')->constrained();
-});
-        */
-
-       });
+    Schema::table('users',function(Blueprint $table){
+        $table->string('images');
+    });
     }
 
     /**

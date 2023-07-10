@@ -10,6 +10,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\PermissionController;
 
@@ -40,6 +41,7 @@ Route::get('/login', function () {
 Route::group(['middleware' => 'auth', 'prefix' => 'admin'], function () {
     Route::get('/', [AdminController::class, 'index'])->name('admin');
     Route::get('/logout', [AuthManager::class, 'logout'])->name('logout');
+    Route::get('/users/search',[UserController::class,'search'])->name('users.search');
 
 
     // Route::get('/users',[UserController::class,'index'])->name('users.index');
@@ -52,11 +54,7 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin'], function () {
 
 
     Route::resource('/users', UserController::class);
-    Route::resource('/categories', CategoryController::class);
-    Route::resource('/products', ProductController::class);
-    Route::resource('/brands', BrandController::class);
-    Route::resource('/roles', RoleController::class);
-    Route::resource('/permissions', PermissionController::class);
+    Route::resource('/departments', DepartmentController::class);
 
 
 

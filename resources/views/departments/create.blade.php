@@ -1,7 +1,7 @@
 @extends('admin')
 @section('content')
     <div class="container">
-        <form enctype="multipart/form-data" action="{{ route('categories.store') }}" method="POST" class="ms-auto me-auto" style="width: 500px">
+        <form enctype="multipart/form-data" action="{{ route('departments.store') }}" method="POST" class="ms-auto me-auto" style="width: 500px">
             @csrf
             <div class="mb-3">
                 <label for="exampleInputEmail1" class="form-label">Name</label>
@@ -12,14 +12,8 @@
                 @enderror
             </div>
             <div class="mb-3">
-                <label for="exampleInputEmail1" class="form-label">image</label>
-                <input type="file" name="image" class="form-control" id="exampleInputEmail1"
-                    aria-describedby="emailHelp">
-
-            </div>
-            <div class="mb-3">
                 <label for="exampleInputEmail1" class="form-label">Submit</label>
-                <input type="submit" name="submit" class="form-control "  value="Add Category"id="exampleInputEmail1"
+                <input type="submit" name="submit" class="form-control "  value="Add department"id="exampleInputEmail1"
                     aria-describedby="emailHelp">
             </div>
         </form>

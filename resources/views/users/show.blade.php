@@ -5,6 +5,9 @@
 
             @csrf
             <div class="mb-3">
+                <img height="300" width="200" src="/storage/{{$user->images}}" alt="">
+            </div>
+            <div class="mb-3">
                 <label for="exampleInputEmail1" class="form-label">Name</label>
                 <input  disabled type="text"value="{{$user->name}}"  name="name" class="form-control  " id="exampleInputEmail1"
                     aria-describedby="emailHelp">

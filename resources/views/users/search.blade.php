@@ -22,7 +22,6 @@
 
                             <th scope="col">Name</th>
                             <th scope="col">Email</th>
-                            <th scope="col">Department name</th>
 
                             <th class="text-center" scope="col">Actions</th>
                         </tr>
@@ -33,7 +32,6 @@
 
                                 <td><a href="{{route('users.show',['user' => $user])}}"> {{ $user->name }}</a></td>
                                 <td>{{ $user->email }}</td>
-                                <td> {{ $user->department->name }}</td>
                                 <td>
                                     <div class="d-flex justify-content-center">
 

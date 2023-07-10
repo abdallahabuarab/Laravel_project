@@ -11,8 +11,12 @@ use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
+    function department()
+    {
+        return $this->belongsTo(Department::class);
+    }
 
-    use HasApiTokens, HasFactory, Notifiable, HasRoles;
+    use HasApiTokens, HasFactory, Notifiable;
 
 
     /**
@@ -24,6 +28,8 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'images',
+        'department_id'
     ];
 
     /**

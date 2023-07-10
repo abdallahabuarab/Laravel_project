@@ -13,10 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('brands', function (Blueprint $table) {
-            $table->renameColumn('nameee' , 'name');
-        });
-    }
+        Schema::table('users' , function(Blueprint $table){
+            $table->unsignedBigInteger('department_id');
+
+            $table->foreign('department_id')->on('departments')->references('id')->onDelete('cascade');
+    });
+}
+
 
     /**
      * Reverse the migrations.

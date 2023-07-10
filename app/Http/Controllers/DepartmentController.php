@@ -2,15 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Category;
+use App\Models\Department;
 use Illuminate\Http\Request;
 
-class CategoryController extends Controller
+
+class DepartmentController extends Controller
 {
-    public function __construct()
-    {
-        $this->authorizeResource(Category::class);
-    }
+
     /**
      * Display a listing of the resource.
      *
@@ -18,8 +16,10 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = Category::all();
-        return view('categories.index', compact('categories'));
+
+        $departments = Department::all();
+
+        return view('departments.index', compact('departments'));
     }
 
     /**
@@ -29,7 +29,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        return view('categories.create');
+        return view('departments.create');
     }
 
     /**
@@ -40,15 +40,13 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        $file = $request->file('image')->store('/images', 'public');
-
-       Category::create([
+       Department::create([
             'name' => $request->name,
-            'images' => $file,
+
 
         ]);
 
-        return redirect(route('categories.index'));
+        return redirect(route('departments.index'));
     }
 
     /**
@@ -57,20 +55,20 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(category $category)
+   /* public function show(category $category)
     {
         return view('categories.show' , compact('category'));
     }
-
+*/
     /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Category $category)
+    public function edit(Department $department)
     {
-        return view('categories.edit', compact('category'));
+        return view('departments.edit', compact('department'));
     }
 
     /**
@@ -80,18 +78,16 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Category $category)
+    public function update(Request $request, Department $department)
     {
-        $data = ['name' => $request->name];
+        $data = ['name' => $request->name,
 
-        if ($request->hasFile('image')) {
-            $path = $request->file('image')->store('/images', 'public');
-            $data['images'] = $path;
-        }
+    ];
 
-        $category->update($data);
 
-        return redirect(route('categories.index'));
+        $department->update($data);
+
+        return redirect(route('departments.index'));
     }
     /**
      * Remove the specified resource from storage.
@@ -99,9 +95,9 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Category $category)
+    public function destroy(Department $department)
     {
-        $category->delete();
+        $department->delete();
         return redirect()->back();
     }
 }

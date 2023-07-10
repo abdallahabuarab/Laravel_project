@@ -18,37 +18,39 @@
                         </a>
                     </li>
                     <li class="nav-item m-3">
-                        <a href="/admin/categories" class="nav-link @if (str_starts_with(Route::current()->getName(), 'categories')) active @endif"
+                        <a href="/admin/departments" class="nav-link @if (str_starts_with(Route::current()->getName(), 'departments')) active @endif"
                             aria-current="page">
-                            Categories
+                            Departments<!--Categories-->
                         </a>
                     </li>
+                    <!--
                     <li class="nav-item m-3">
-                        <a href="/admin/products" class="nav-link @if (str_starts_with(Route::current()->getName(), 'products')) active @endif"
+                        <a href="/admin/products" class="nav-link  'products')) active "
                             aria-current="page">
                             Products
                         </a>
                     </li>
                     <li class="nav-item m-3">
-                        <a href="/admin/brands" class="nav-link @if (str_starts_with(Route::current()->getName(), 'brands')) active @endif"
+                        <a href="/admin/brands" class="nav-link  'brands')) active "
                             aria-current="page">
                             Brands
                         </a>
                     </li>
                     <li class="nav-item m-3">
-                        <a href="/admin/roles" class="nav-link @if (str_starts_with(Route::current()->getName(), 'roles')) active @endif"
+                        <a href="/admin/roles" class="nav-link 'roles')) active "
                             aria-current="page">
                             Roles
                         </a>
                     </li>
                     <li class="nav-item m-3">
-                        <a href="/admin/permissions" class="nav-link @if (str_starts_with(Route::current()->getName(), 'permission')) active @endif"
+                        <a href="/admin/permissions" class="nav-link  'permission')) active "
                             aria-current="page">
                             Permissions
                         </a>
                     </li>
 
                 </ul>
+            -->
                 <hr>
                 <div class="dropdown">
                     <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle"
@@ -57,6 +59,7 @@
                             class="rounded-circle me-2">
                         <strong>abdallah</strong>
                     </a>
+
                     <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
                         <li><a class="dropdown-item" href="{{ route('logout') }}">Sign out</a></li>
                     </ul>
