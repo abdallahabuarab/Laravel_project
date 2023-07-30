@@ -1,5 +1,10 @@
 @extends('admin')
 @section('content')
+<div class="x-20px">
+    <h1>
+        Departments
+    </h1>
+</div>
 <div style="margin-left: auto" >
     <a class="btn btn-secondary my-2" href="{{ route('departments.create') }}">Create Department</a>
 </div>

@@ -1,5 +1,8 @@
 @extends('admin')
 @section('content')
+<div >
+    <h1>Users</h1>
+</div>
 <div class="container">
     <div class="search" style="float:right">
         <form action="{{route('users.search')}}" method="get">

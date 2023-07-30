@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\Api\LoginController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,6 +20,5 @@ use App\Http\Controllers\AdminController;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-Route::post('/login', 'AuthController@login');
-
+Route::get('/login',LoginController::class);
 

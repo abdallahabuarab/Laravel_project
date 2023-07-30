@@ -114,7 +114,7 @@ class UserController extends Controller
             $path = $request->file('images')->store('/images', 'public');
             $data['images'] = $path;
         }
-        $user->update([$data]);
+        $user->update($data);
 
 
 
